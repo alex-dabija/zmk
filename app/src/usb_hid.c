@@ -12,6 +12,7 @@
 
 #include <zmk/usb.h>
 #include <zmk/hid.h>
+#include <zmk/usb_hid.h>
 #include <zmk/keymap.h>
 #include <zmk/led_indicators.h>
 #include <zmk/event_manager.h>
@@ -118,7 +119,7 @@ static const struct hid_ops ops = {
     .set_report = set_report_cb,
 };
 
-static int zmk_usb_hid_send_report(const uint8_t *report, size_t len) {
+int zmk_usb_hid_send_report(const uint8_t *report, size_t len) {
     switch (zmk_usb_get_status()) {
     case USB_DC_SUSPEND:
         return usb_wakeup_request();
